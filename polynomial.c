@@ -100,6 +100,7 @@ void addpoly(int sa,int fa,int sb,int fb,int* sd,int* fd,POLY t[])
         }
         *fd=avail-1;
     }
+    *fd=avail-1; // check with this once ok for some reason fd is not getting updated and it contains some garbage value
 }
 void printpoly(int s,int f,POLY t[])
 {
