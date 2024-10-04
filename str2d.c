@@ -6,6 +6,7 @@ int main()
     printf("enter no of strings\n");
     scnaf("%d",&n);
     char str[n][20];
+    printf("enter the strings\n");
     for(int i=0;i<n;i++)
     {
         printf("enter the string %d",i+1);
