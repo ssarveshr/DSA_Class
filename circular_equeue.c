@@ -36,7 +36,6 @@ int main()
                     }
                     break;
             case 3: // sir told he will write the code;
-                    display(front, rear, cq);
                     break;
             case 4: exit(0);
             default:printf("Invalid choice! please try again\n")   ;    
@@ -70,9 +69,9 @@ int cdequeue(int *r,int *c,int q[])
     (*c)--;
     return val;
 }
-void display(int f, int r,int q[])
-{
-    for(;f<r+1;f++)
-        printf("%d ",q[f]);
-    printf("\n");
-}
+// void display(int f, int r,int q[])
+// {
+//     for(;f<r+1;f++)
+//         printf("%d ",q[f]);
+//     printf("\n");
+// }
