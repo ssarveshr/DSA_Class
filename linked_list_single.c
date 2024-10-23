@@ -11,6 +11,7 @@ node *ins_front(int,node*);
 node *ins_rear(int,node*);
 node *del_front(node*);
 node *del_rear(node*);
+node *del_specific(int,node*);
 int main()
 {
     node* first=NULL;
@@ -24,32 +25,35 @@ int main()
         printf("5.delete specific element\n");
         printf("6.traverse\n");
         printf("7.exit\n");
+        printf("choose : ");
         scanf("%d",&ch);
+        int ele;
         switch(ch)
         {
             case 1:
-
-            int ele;
             printf("Enter the element : ");
             scanf("%d",&ele);
             first=ins_front(ele,first);
             break;
 
             case 2:
-
             printf("enter an element : ");
             scanf("%d",&ele);
             first=ins_rear(ele,first);
             break;
 
             case 3:
-
             first=del_front(first);
             break;
 
             case 4:
             first=del_rear(first);
             break;
+
+            case 5:
+            printf("enter the data,whose node is to be deletd : ");
+            scanf("%d",ele);
+            first=del_specific(ele,first);
         }
     }
 }
@@ -96,7 +100,7 @@ node* del_front(node* first)
         return NULL;
     if(first->link==NULL)
     {
-        print("the deleted is %d",first->data);
+        printf("the deleted is %d",first->data);
         free(first);
         return NULL;
     }
@@ -131,3 +135,44 @@ node* del_rear(node* first)
     prev->link=NULL;
     return first;
 }
+
+node* del_specific(int ele,node *first)
+{
+    if(first==NULL)
+    {
+        printf("List is empty");
+        return NULL;
+    }
+    if(first->link==NULL && first->data==ele)
+    {
+        printf("deleted is %d",first->data);
+        free(first);
+        return NULL;
+    }
+    node* prev=NULL,*cur;
+    cur=first;
+    int cnt=0;
+    while(cur->link!=NULL)
+    {
+        if(cur->data==ele)
+        {
+            printf("deleted is %d\n",cur->data);
+            prev->link=cur->link;
+            free(cur);
+            cnt++;
+            return first;
+        }
+        else
+        {
+            prev=cur;
+            cur=cur->link;
+        }
+    }
+
+    if(cnt==0)
+    {
+        printf("element not found\n");
+        return first;
+    }
+}
+
