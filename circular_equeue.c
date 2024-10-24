@@ -69,9 +69,18 @@ int cdequeue(int *r,int *c,int q[])
     (*c)--;
     return val;
 }
-// void display(int f, int r,int q[])
-// {
-//     for(;f<r+1;f++)
-//         printf("%d ",q[f]);
-//     printf("\n");
-// }
+void display(int front, int count, int q[]) 
+{
+    if (isempty(count)) {
+        printf("Circular queue is empty\n");
+        return;
+    }
+    
+    printf("Elements in the circular queue: ");
+    for (int i = 0; i < count; i++) {
+        // Calculate the actual index in the queue array
+        int index = (front + i) % max;
+        printf("%d ", q[index]);
+    }
+    printf("\n");
+}
