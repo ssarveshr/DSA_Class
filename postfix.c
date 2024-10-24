@@ -80,7 +80,7 @@ int compute(int o1, int o2, char s)
         case '+':return (o1 + o2);
         case '-':return (o1 - o2);
         case '*':return (o1 * o2);
-        case '/':if(02==0)
+        case '/':if(o2==0)
                     return 0;
                 else
                     return (o1/o2);
