@@ -35,7 +35,7 @@ int main()
                         printf("The deleted element from the circular queue is %d\n",ele);
                     }
                     break;
-            case 3: // sir told he will write the code;
+            case 3: display(front,count,cq);
                     break;
             case 4: exit(0);
             default:printf("Invalid choice! please try again\n")   ;    
@@ -71,7 +71,8 @@ int cdequeue(int *r,int *c,int q[])
 }
 void display(int front, int count, int q[]) 
 {
-    if (isempty(count)) {
+    if (isempty(count)) 
+    {
         printf("Circular queue is empty\n");
         return;
     }
