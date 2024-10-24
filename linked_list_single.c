@@ -6,12 +6,14 @@ typedef struct list
     int data;
     struct list* link;
 }node;
+
 node *getnode();
 node *ins_front(int,node*);
 node *ins_rear(int,node*);
 node *del_front(node*);
 node *del_rear(node*);
 node *del_specific(int,node*);
+void display(node*);
 int main()
 {
     node* first=NULL;
@@ -54,6 +56,16 @@ int main()
             printf("enter the data,whose node is to be deletd : ");
             scanf("%d",ele);
             first=del_specific(ele,first);
+
+            case 6:
+            if(first==NULL)
+                printf("list is empty\n");
+            else
+                display(first);
+            
+            case 7:
+            printf("code terminated ...\n");
+            exit(0);
         }
     }
 }
@@ -143,36 +155,39 @@ node* del_specific(int ele,node *first)
         printf("List is empty");
         return NULL;
     }
-    if(first->link==NULL && first->data==ele)
+    if(first->data==ele)
     {
-        printf("deleted is %d",first->data);
-        free(first);
-        return NULL;
+        node* temp=first;
+        printf("deleted is %d",temp->data);
+        first=first->link;
+        free(temp);
+        return first;
     }
-    node* prev=NULL,*cur;
-    cur=first;
-    int cnt=0;
-    while(cur->link!=NULL)
+    node* prev=NULL,*cur=first;
+    while(cur!=NULL)
     {
         if(cur->data==ele)
         {
-            printf("deleted is %d\n",cur->data);
+            printf("deleted element = %d",cur->data);
             prev->link=cur->link;
             free(cur);
-            cnt++;
             return first;
         }
-        else
+        prev=cur;
+        cur=cur->link;
+        if(cur==NULL)
         {
-            prev=cur;
-            cur=cur->link;
+            printf("element not found");
+            return first;
         }
     }
-
-    if(cnt==0)
+}
+void display(node* first)
+{
+    node* temp=first;
+    while(temp!=NULL)
     {
-        printf("element not found\n");
-        return first;
+        printf("%d\n",temp->data);
+        temp=temp->link;
     }
 }
-
