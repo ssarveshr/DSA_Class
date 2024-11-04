@@ -1,3 +1,4 @@
+
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -191,3 +192,6 @@ void display(node* first)
         temp=temp->link;
     }
 }
+/*stack and queue operations are valid in singly linked list 
+    insert front and delete front 
+    insert rear and delete rear are stack operations*/

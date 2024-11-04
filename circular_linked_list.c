@@ -9,6 +9,7 @@ typedef struct clist
 cnode *ins_front(int ele,cnode* last);
 cnode *del_front(cnode* last);
 cnode *getnode();
+cnode *del_rear(cnode *last);
 int main()
 {
     cnode *last=NULL;
@@ -75,4 +76,39 @@ cnode *del_front(cnode* last)
     last->link=temp->link;
     free(temp);
     return last;
+}
+
+cnode *del_rear(cnode *last)
+{
+    if(last=NULL)
+    {
+        printf("list is empty\n");
+        return last;
+    }
+    if(last->link==last)
+    {
+        printf("deleted is %d",last->data);
+        free(last);
+        return NULL;
+    }
+    cnode *temp=last->link;
+    while(temp->link!=last)
+    {
+        temp=temp->link;
+    }
+    temp->link=last->link;
+    printf("the deleted is %d",last->data);
+    free(last);
+    return temp;
+}
+void display(cnode* last)
+{
+    cnode* temp=last->link;
+    do
+    {
+        printf("%d ",temp->data);
+        temp=temp->link;
+    }
+    while(temp->link!=last);
+    printf("%d\n",temp->data);
 }
