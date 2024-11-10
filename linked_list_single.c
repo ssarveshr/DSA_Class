@@ -55,7 +55,7 @@ int main()
 
             case 5:
             printf("enter the data,whose node is to be deletd : ");
-            scanf("%d",ele);
+            scanf("%d",&ele);
             first=del_specific(ele,first);
 
             case 6:
