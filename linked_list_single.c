@@ -103,7 +103,7 @@ node *ins_rear(int ele,node* first)
     node* temp=first;
     while(temp->link!=NULL)
         temp=temp->link;
-    temp->data=ele;
+    temp->link=new;
     return first;
 }
 
