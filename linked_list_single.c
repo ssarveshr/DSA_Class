@@ -70,7 +70,7 @@ int main()
         }
     }
 }
-
+//this is a commnit
 node *getnode()
 {
     node *temp=(node*)malloc(sizeof(node));
@@ -136,7 +136,7 @@ node* del_rear(node* first)
         free(first);
         return NULL;
     }
-    node *prev=NULL,*cur;
+    node *prev=NULL,*cur;vgsrgb f
     cur=first;
     while(cur->link!=NULL)
     {
