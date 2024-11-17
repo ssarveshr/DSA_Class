@@ -195,3 +195,6 @@ void display(node* first)
 /*stack and queue operations are valid in singly linked list 
     insert front and delete front 
     insert rear and delete rear are stack operations*/
+
+
+//hello hi how are you
