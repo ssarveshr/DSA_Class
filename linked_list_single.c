@@ -136,7 +136,7 @@ node* del_rear(node* first)
         free(first);
         return NULL;
     }
-    node *prev=NULL,*cur;vgsrgb f
+    node *prev=NULL,*cur;
     cur=first;
     while(cur->link!=NULL)
     {
