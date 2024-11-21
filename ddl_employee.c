@@ -29,7 +29,7 @@ ehead *insert_rear(ehead *);
 // ehead *delete_front(ehead *);
 // ehead *delete_rear(ehead *);
 // ehead *del_specific(ehead *);
-enode *setnode();
+enode *getnode();
 // void display(ehead *);
 int main()
 {
@@ -69,7 +69,7 @@ int main()
         }
     }
 }
-enode *setnode()
+enode *getnode()
 {
     enode *temp=(enode *)malloc(sizeof(enode));
     if(temp==NULL)
@@ -80,7 +80,7 @@ enode *setnode()
 
 ehead* insert_front(ehead *head)
 {
-    enode *new=setnode();
+    enode *new=getnode();
     printf("enter the details :");
     printf("enter the SSN,Name,Dept,Designation,Salary");
     scanf("%s %s %s %s %f",new->SSN,new->name,new->dept,new->desig,&new->sal);
@@ -101,7 +101,7 @@ ehead* insert_front(ehead *head)
 }
 ehead *insert_rear(ehead *head)
 {
-    enode *new=setnode();
+    enode *new=getnode();
     printf("enter details :\n");
     printf("enter the SSN,Name,Dept,Designation,Salary");
     scanf("%s %s %s %s %f",new->SSN,new->name,new->dept,new->desig,&new->sal);
