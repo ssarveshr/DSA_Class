@@ -26,7 +26,7 @@ typedef struct EMPHEAD
 }ehead;
 ehead *insert_front(ehead *);
 ehead *insert_rear(ehead *);
-// ehead *delete_front(ehead *);
+ehead *delete_front(ehead *);
 // ehead *delete_rear(ehead *);
 // ehead *del_specific(ehead *);
 enode *getnode();
@@ -57,8 +57,8 @@ int main()
                     break;
             case 2: head=insert_rear(head);
                     break;
-            // case 3: head=delete_front(head);
-            //         break;
+            case 3: head=delete_front(head);
+                    break;
             // case 4: head=delete_rear(head);
             //         break;
             // case 5: head=del_specific(head);
@@ -122,4 +122,14 @@ ehead *insert_rear(ehead *head)
     new->llink=temp;
     head->data+=1;
     return head;
+}
+ehead *delete_front(ehead *head)
+{
+    if(head->rlink==NULL)
+    {
+        printf("List empty");
+        return head;
+    }
+
+
 }

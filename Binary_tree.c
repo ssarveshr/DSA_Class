@@ -11,6 +11,7 @@ bnode* insert(int,bnode*);
 bnode* getnode();
 bnode* delete(bnode*);
 bnode* del_spec(int,int,bnode*);
+int b_search_tree(int,bnode*);
 void display(int,bnode*);
 void postorder(bnode*);
 void preorder(bnode*);
@@ -28,7 +29,9 @@ int main()
         printf("4.display\n");
         printf("5.exit\n");
         printf("Enter your choice : ");
-        scanf("%d",&ch);   
+        scanf("%d",&ch);  
+        int key;
+        int result; 
         switch(ch)
         {
             case 1: printf("Enter the to be inserted into the tree : ");
@@ -49,9 +52,14 @@ int main()
                     scanf("%d",&c);
                     display(c,root);
                     break;
-            case 5: exit(0);
+            case 5: printf("enter the key to be searched :");
+                    scanf("%d",&key);
+                    result=b_search_tree(key,root);
+                    if(result==1)
+                        printf("key found\n");
+                    else
+                        printf("key not found\n");
                     break;
-            
         }
     }
 }
@@ -129,4 +137,18 @@ void display(int ch,bnode* r)
         case 3: postorder(r);
                 break;
     }
+}
+int b_search_tree(int key,bnode* root)
+{
+    bnode *temp=root;
+    while(temp!=NULL)
+    {
+        if(key==temp->data)
+            return 1;
+        if(key<temp->data)
+            temp=temp->llink;
+        else
+            temp=temp->rlink;
+    }
+    return -1;
 }
