@@ -10,30 +10,31 @@
 #include<string.h>
 typedef struct student_node
 {
+    char USN[20];
     char name[20];
-    int m1;
-    int m2;
+    char programm[20];
+    char sem[20];
     struct student_node *link;
 }node;
 node* getnode();
-node* insert_front(char[],int[],node*);
+node* insert_front(char[],char[],char[],char[],node*);
 node* delete_front(node*);
-node* insert_rear(char[],int[],node*);
+node* insert_rear(char[],char[],char[],char[],node*);
 node* delete_rear(node*);
 void display(node*);
 int main()
 {
     node *first=NULL;
-    int ele[2],ch;
-    char sample_name[20];
+    int ch;
+    char student_name[20],student_USN[20],student_prog[20],student_sem[20];
     while(1)
     {
         printf("\n");
         printf("\n");
-        printf("1) Enter new student data ( insert at rear )\n");
-        printf("2) Enter new student data at first ( insert at front )\n");
-        printf("3) Remove student data ( delete at rear )\n");
-        printf("4) Remove student data at the start ( delete at front )\n");
+        printf("1) insert data at rear \n");
+        printf("2) insert data at front \n");
+        printf("3) Remove data at rear )\n");
+        printf("4) Remove data at front )\n");
         printf("5) Review the database of the student data ( display )\n");
         printf("6) Quit the program\n");
         printf("\n");
@@ -44,21 +45,27 @@ int main()
         {
             case 1: printf("\n");
                     printf("Enter the name of the student : ");
-                    scanf("%s",sample_name);
-                    printf("Enter the marks of the student obtained in two subjects : ");
-                    scanf("%d",&ele[0]);
-                    scanf("%d",&ele[1]);
-                    first=insert_rear(sample_name, ele, first);
+                    scanf("%s",student_name);
+                    printf("Enter the USN of the : ");
+                    scanf("%s",student_USN);
+                    printf("Enter the program of the student : ");
+                    scanf("%s",student_prog);
+                    printf("Enter the semester of the student : ");
+                    scanf("%s",student_sem);
+                    first=insert_rear(student_name,student_USN,student_prog,student_USN,first);
                     printf("\n");
                     printf("Database updated\n\n");
                     break;
             case 2: printf("\n");
                     printf("Enter the name of the student : ");
-                    scanf("%s",sample_name);
-                    printf("Enter the marks of the student obtained in two subjects : ");
-                    scanf("%d",&ele[0]);
-                    scanf("%d",&ele[1]);
-                    first=insert_front(sample_name, ele, first);
+                    scanf("%s",student_name);
+                    printf("Enter the USN of the : ");
+                    scanf("%s",student_USN);
+                    printf("Enter the program of the student : ");
+                    scanf("%s",student_prog);
+                    printf("Enter the semester of the student : ");
+                    scanf("%s",student_sem);
+                    first=insert_front(student_name,student_USN,student_prog,student_USN,first);
                     printf("\n");
                     printf("Database updated\n\n");
                     break;
@@ -87,19 +94,17 @@ int main()
 node* getnode()
 {
     node *new=(node*)malloc(sizeof(node));
-    new->m1=0;
-    new->m2=0;
-    new->link=NULL;
     if(new==NULL)
         return NULL;
     return new;
 }
-node* insert_front(char name[],int e[],node* f)
+node* insert_front(char n[],char u[],char p[],char s[],node* f)
 {
     node* node=getnode();
-    node->m1=e[0];
-    node->m2=e[1];
-    strcpy(node->name,name);
+    strcpy(node->name,n);
+    strcpy(node->USN,u);
+    strcpy(node->programm,p);
+    strcpy(node->sem,s);
     if(f==NULL)
     {
         node->link=NULL;
@@ -120,7 +125,7 @@ node* delete_front(node* f)
     printf("%s data has been deleted\n",temp->name);
     return f;
 }
-node* insert_rear(char name[],int e[],node *f)
+node* insert_rear(char n[],char u[],char p[],char s[],node *f)
 {    
     if(f==NULL)
     {
@@ -129,9 +134,10 @@ node* insert_rear(char name[],int e[],node *f)
     }
     node* temp=f;
     node* node=getnode();
-    node->m1=e[0];
-    node->m2=e[1];
-    strcpy(node->name,name);
+    strcpy(node->name,n);
+    strcpy(node->USN,u);
+    strcpy(node->programm,p);
+    strcpy(node->sem,s);
     while(temp->link!=NULL)
     {
         temp=temp->link;
@@ -165,12 +171,15 @@ void display(node* f)
     }
     node* temp=f;
     int i=0;
-    printf("SLNO\tNAME\t\tMARKS 1\tMARKS 2\n");
     do
     {
-        printf("%d\t%s\t\t%d\t%d\n",i,temp->name,temp->m1,temp->m2);
+        printf("Name : %s\n",temp->name);
+        printf("USN : %s\n",temp->USN);
+        printf("PROGRAMME : %s\n",temp->programm);
+        printf("SEMESTER : %s\n",temp->sem);
         temp=temp->link;
         i++;
+        printf("\n");
     }
     while(temp!=NULL);
 }

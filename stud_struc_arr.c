@@ -1,4 +1,6 @@
-//wap that accepts student details including r_no name and fee for n students.write a c functions wheather a key name which is accepted by user is found in the record or not. 
+//wap that accepts student details including r_no name and 
+//fee for n students.write a c functions wheather a key name 
+//which is accepted by user is found in the record or not. 
 #include<stdio.h>
 #include<string.h>
 struct student 
