@@ -24,7 +24,7 @@ int main()
         switch(ch)
         {
             case 1: printf("enter the element : ");
-                    scanf("%d",ele);
+                    scanf("%d",&ele);
                     last=ins_front(ele,last);
                     printf("element inserted\n");
             case 2: last=del_front(last);
@@ -61,7 +61,7 @@ cnode *ins_front(int ele,cnode* last)
 }
 cnode *del_front(cnode* last)
 {
-    if(last=NULL)
+    if(last!=NULL)
     {
         printf("list is empty\n");
         return last;
@@ -80,7 +80,7 @@ cnode *del_front(cnode* last)
 
 cnode *del_rear(cnode *last)
 {
-    if(last=NULL)
+    if(last!=NULL)
     {
         printf("list is empty\n");
         return last;
@@ -112,3 +112,4 @@ void display(cnode* last)
     while(temp->link!=last);
     printf("%d\n",temp->data);
 }
+// hi i am samudra

@@ -63,7 +63,7 @@ int main()
                 printf("list is empty\n");
             else
                 display(first);
-            
+            break;
             case 7:
             printf("code terminated ...\n");
             exit(0);
@@ -84,7 +84,7 @@ node *getnode()
 
 node *ins_front(int ele,node* fir)
 {
-    node *new;
+    node *new=getnode();
     new->data=ele;
     new->link=NULL;
     if(fir==NULL)
@@ -95,7 +95,7 @@ node *ins_front(int ele,node* fir)
 
 node *ins_rear(int ele,node* first)
 {
-    node *new;
+    node *new=getnode();
     new->data=ele;
     new->link=NULL;
     if(first==NULL)
@@ -183,9 +183,9 @@ node* del_specific(int ele,node *first)
         }
     }
 }
-void display(node* first)
+void display(node* f)
 {
-    node* temp=first;
+    node* temp=f;
     while(temp!=NULL)
     {
         printf("%d\n",temp->data);
