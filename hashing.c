@@ -31,7 +31,7 @@ int main()
             case 1:
 
             printf("enter enum ename salary: ");
-            scanf("%d %s %d",&e.eno,e.ename,e.sal);
+            scanf("%d %s %d",&e.eno,e.ename,&e.sal);
             index=indexcopy=(e.eno%n);
             fseek(fp,s*index,SEEK_SET);
             fread(&id,sizeof(int),1,fp);
@@ -55,6 +55,19 @@ int main()
             {
                 fseek(fp,s*index,SEEK_SET);
                 fwrite(&e,sizeof(emp),1,fp);
+            }
+            break;
+
+            case 2:
+            i=0;
+            for(;i<n;i++)
+            {
+                fseek(fp,s*i,SEEK_SET);
+                fread(&e,sizeof(emp),1,fp);
+                if(e.eno!=-1)
+                {
+                    printf("%d %d %d\n",e.eno,e.ename,e.sal);
+                }
             }
             break;
 
