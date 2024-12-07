@@ -63,7 +63,7 @@ int main()
                 printf("list is empty\n");
             else
                 display(first);
-            
+            break;
             case 7:
             printf("code terminated ...\n");
             exit(0);
@@ -183,9 +183,9 @@ node* del_specific(int ele,node *first)
         }
     }
 }
-void display(node* first)
+void display(node* f)
 {
-    node* temp=first;
+    node* temp=f;
     while(temp!=NULL)
     {
         printf("%d\n",temp->data);
