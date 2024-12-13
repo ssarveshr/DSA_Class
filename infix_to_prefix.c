@@ -2,9 +2,8 @@
 #include<string.h>
 
 void infix_postfix(char[]);
-int instackp(char);
-int inputp(char );
-// void infix_postfix(char);
+int in_stackpres(char);
+int input_pres(char );
 
 int main()
 {
@@ -15,7 +14,7 @@ int main()
     return 0;
 }
 
-int instackp(char symbol)
+int in_stackpres(char symbol)
 {
     switch(symbol)
     {
@@ -31,42 +30,48 @@ int instackp(char symbol)
     }
     
 }
-int inputp(char symbol)
+int input_pres(char symbol)
 {
     switch(symbol)
     {
         case '+':
-        case '-': return 2;
+        case '-': return 1;
         case '*':
-        case '/': return 4;
+        case '/': return 3;
         case '(': return 9;
         case ')': return 0;
         case '^':
         case '$': return 5;
         case '#': return -1;
+        default : return 7;
     }
 }
-void infix_postfix(char in[])
+void infix_postfix(char infix[])
 {
     char post[10];
     int top=-1;
-    char stack[10],sym;
+    char stack[10],symbol;
     stack[++top]='#';
     // top++;
     int j=0;
     int i=0;
-    for(;i<strlen(in);i++)
+    for(;i<strlen(infix);i++)
     {
-        sym=in[i];
-        while(instackp(stack[top])>inputp(sym))
+        symbol=infix[i];
+        while(in_stackpres(stack[top])>input_pres(symbol))
         {
             post[j]=stack[top--];
             j++;
         }
-        if(instackp(stack[top])!=inputp(sym))
-            stack[top++]=sym;
+        if(in_stackpres(stack[top])!=input_pres(symbol))
+            stack[++top]=symbol;
         else
             top--;
-        while
     }
+    while(stack[top]!='#')
+    {
+        post[j++]=stack[top--];
+    }
+    post[j]='\0';
+    printf("%s\n",post);
 }
