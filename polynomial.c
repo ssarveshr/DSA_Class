@@ -1,114 +1,191 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
-typedef struct 
+typedef struct poly_node 
 {
-    float coef;
-    int exp;
-}POLY;
+    float coeff;
+    int expx, expy, expz;
+    struct poly_node *link;
+} POLY;
 
-int avail=0;
+POLY *getnode();
+void read_poly(int n, POLY *head);
+void print_poly(POLY *head);
+POLY *add_poly(POLY *h1, POLY *h2);
+int COMP(POLY *t1, POLY *t2);
+void attach(float cf, POLY *temp, POLY **tres);
+POLY *delete_node(POLY *head, POLY *temp);
+void evaluate(POLY *head);
 
-void addpoly(int,int,int,int,int *,int *,POLY[]);
-void readpoly(int,int,POLY[]);
-void printpoly(int,int,POLY[]);
-int comp(int a,int b)
+int main() 
 {
-    if(a==b)
-        return 0;
-    else if (a>b)
-        return  1;
+    int n1, n2;
+    POLY *head1 = getnode();
+    POLY *head2 = getnode();
+    POLY *head3 = getnode();
+
+    head1->link = head1;
+    head2->link = head2;
+    head3->link = head3;
+
+    printf("Enter number of terms in the first and second polynomial:\n");
+    scanf("%d%d", &n1, &n2);
+
+    printf("Enter first polynomial:\n");
+    read_poly(n1, head1);
+
+    printf("Enter second polynomial:\n");
+    read_poly(n2, head2);
+
+    printf("The first polynomial:\n");
+    print_poly(head1);
+
+    printf("The second polynomial:\n");
+    print_poly(head2);
+
+    // Adding two polynomials
+    head3 = add_poly(head1, head2);
+    printf("Resultant polynomial:\n");
+    print_poly(head3);
+
+    // Evaluation
+    printf("Evaluation of the first polynomial:\n");
+    evaluate(head1);
+    printf("\n");
+}
+
+POLY *getnode() 
+{
+    POLY *temp = (POLY *)malloc(sizeof(POLY));
+    return temp;
+}
+
+void read_poly(int n, POLY *head) 
+{
+    POLY *newN, *temp;
+    int i;
+
+    temp = head;
+    for (i = 0; i < n; i++) 
+    {
+        newN = getnode();
+        printf("Enter coefficient and exponents (x, y, z):\n");
+        scanf("%f%d%d%d", &(newN->coeff), &(newN->expx), &(newN->expy), &(newN->expz));
+        temp->link = newN;
+        temp = temp->link;
+    }
+    temp->link = head;
+}
+
+void print_poly(POLY *head) 
+{
+    POLY *temp = head->link;
+    while (temp != head) 
+    {
+        printf("(%2.2fx^%dy^%dz^%d) + ", temp->coeff, temp->expx, temp->expy, temp->expz);
+        temp = temp->link;
+    }
+    printf("\n");
+}
+
+POLY *add_poly(POLY *h1, POLY *h2) 
+{
+    POLY *temp1, *temp2;
+    POLY *result = getnode();
+    POLY *tempres = result;
+    double sum;
+
+    temp1 = h1->link;
+    while (temp1 != h1) 
+    {
+        temp2 = h2->link;
+        while (temp2 != h2) 
+        {
+            switch (COMP(temp1, temp2)) 
+            {
+                case 1: // Exponents are equal
+                    sum = temp1->coeff + temp2->coeff;
+                    if (sum)
+                        attach(sum, temp1, &tempres);
+                    h2 = delete_node(h2, temp2);
+                    temp2 = h2->link;
+                    temp1 = temp1->link;
+                    break;
+                case -1: // Exponents are unequal
+                    temp2 = temp2->link;
+                    break;
+            }
+        }
+        if (temp1 != h1) 
+        {
+            attach(temp1->coeff, temp1, &tempres);
+            temp1 = temp1->link;
+        }
+    }
+
+    temp2 = h2->link;
+    while (temp2 != h2) 
+    {
+        attach(temp2->coeff, temp2, &tempres);
+        temp2 = temp2->link;
+    }
+
+    tempres->link = result;
+    return result;
+}
+
+int COMP(POLY *t1, POLY *t2) 
+{
+    if ((t1->expx == t2->expx) && (t1->expy == t2->expy) && (t1->expz == t2->expz))
+        return 1;
     else
         return -1;
 }
 
-void attach(float cf,int ex,POLY T[])
+void attach(float cf, POLY *temp, POLY **tres) 
 {
-    T[avail].coef=cf;
-    T[avail].exp=ex;
-    avail++;
+    POLY *newN = getnode();
+    newN->coeff = cf;
+    newN->expx = temp->expx;
+    newN->expy = temp->expy;
+    newN->expz = temp->expz;
+    (*tres)->link = newN;
+    *tres = newN;
 }
 
-int main()
+POLY *delete_node(POLY *head, POLY *temp) 
 {
-    POLY terms[10];
-    int SA=0,FA,SB,na,nb,SD,FD,FB;
-    printf("no of terms in 1st polynomial : ");
-    scanf("%d",&na);
-    readpoly(na,SA,terms);
-    FA=na-1;
-    SB=na;
-    printf("enter no of terms in 2nd polynomial : ");
-    scanf("%d",&nb);
-    FB=na+nb-1;
-    readpoly(FB+1,SB,terms);
-    printf("the first polynomial \n");
-    printpoly(SA,FA,terms);
-    printf("the second polynomial \n");
-    printpoly(SB,FB,terms);
-    avail=na+nb;
-    addpoly(SA,FA,SB,FB,&SD,&FD,terms);
-    printf("sum of the two polynomials \n");
-    printpoly(SD,FD,terms);
-    return 0;
+    POLY *prev, *pres;
+    prev = head;
+    pres = head->link;
+
+    while (pres != temp) 
+    {
+        prev = pres;
+        pres = pres->link;
+    }
+    prev->link = pres->link;
+    free(temp);
+    return head;
 }
 
-void readpoly(int no,int s,POLY t[])
+void evaluate(POLY *head) 
 {
-    printf("enter the coefficeint exponent: \n");
-    for(int i=s;i<no;i++)
-    {
-        scanf("%f %d",&t[i].coef,&t[i].exp);
-    }
-}
+    POLY *temp = head->link;
+    double x, y, z, sum = 0;
+    double tx, ty, tz;
 
-void addpoly(int sa,int fa,int sb,int fb,int* sd,int* fd,POLY t[])
-{
-    float cof;
-    *sd=avail;
-    while((sa<=fa)&&(sb<=fb))
+    printf("Enter values of x, y, and z:\n");
+    scanf("%lf%lf%lf", &x, &y, &z);
+
+    while (temp != head) 
     {
-        switch (comp(t[sa].exp,t[sb].exp))
-        {
-            case -1:attach(t[sb].coef,t[sb].exp,t);
-                    sb++;
-                    break;
-            case 0:cof=t[sa].coef+t[sb].coef;
-                   if(cof)
-                   {
-                    attach(cof,t[sb].exp,t);
-                   }
-                   sa++;
-                   sb++;
-                   break;
-            case 1:attach(t[sa].coef,t[sb].exp,t);
-                   sa++;
-                   break;
-        }
+        tx = (double)temp->expx;
+        ty = (double)temp->expy;
+        tz = (double)temp->expz;
+        sum += ((temp->coeff) * pow(x, tx) * pow(y, ty) * pow(z, tz));
+        temp = temp->link;
     }
-    if(sa<=fa)
-    {
-        for(;sa<=fa;sa++)
-        {
-            attach(t[sa].coef,t[sa].exp,t);
-        }
-    }
-    if(sb<=fb)
-    {
-        while(sb<=fb)
-        {
-            attach(t[sb].coef,t[sb].exp,t);
-        }
-        *fd=avail-1;
-    }
-    *fd=avail-1; // check with this once ok for some reason fd is not getting updated and it contains some garbage value
-}
-void printpoly(int s,int f,POLY t[])
-{
-    printf("polynomial : \n");
-    printf("%0.2f X^(%d) + ",t[0].coef,t[0].exp);
-    for(int i=s+1;i<=f;i++)
-    {
-        printf("%0.2f X^(%d) + ",t[i].coef,t[i].exp);
-    }
-    printf("\n");
-}
+    printf("Result:\n%lf\n", sum);
+} 

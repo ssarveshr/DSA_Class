@@ -9,7 +9,8 @@ poly *getnode();
 void read_poly(poly *,int);
 void print_poly(poly *);
 void evaluate(poly *);
-
+poly* add_poly(poly*,poly*);
+int COMP(poly*,poly*);
 int main()
 {
     int n1,n2;
@@ -70,6 +71,33 @@ void print_poly(poly *head)
         printf("%f x^%d y^%d z^%d  + ",temp->coef,temp->exp_x,temp->exp_y,temp->exp_z);
         temp=temp->link;
     }
+}
+
+int COMP(poly *h1,poly *h2)
+{
+    if(h1->exp_x==h2->exp_y && h2->exp_y==h2->exp_y && h1->exp_z==h2->exp_z)
+        return 1;
+    return 0;
+}
+
+poly* add_poly(poly* h1,poly* h2)
+{
+    poly*temp1=h1->link;
+    poly*temp2;
+    poly*result=getnode();
+    poly* tempres=result;
+    while(temp1!=h1)
+    {
+        temp2=h2->link;
+        while(temp2!=h2)
+        {
+            switch(COMP(temp1,temp2))
+            {
+                case 1:
+            }
+        }
+    }
+
 }
 
 void evaluate(poly *head)

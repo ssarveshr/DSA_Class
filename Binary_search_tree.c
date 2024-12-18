@@ -51,7 +51,7 @@ int main()
                         printf("key not found\n");
                     break;
             case 4:printf("Exiting code....");
-                   break;
+                   exit(0);
             default:printf("invlaid input\n");
         }
     }
