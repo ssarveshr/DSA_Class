@@ -24,35 +24,27 @@ int main()
     while(1)
     {
         printf("1.insert \n");
-        printf("2.delete \n");
-        printf("3.delete specific element\n");
-        printf("4.display\n");
-        printf("5.exit\n");
+        printf("2.display\n");
+        printf("3.search element\n");
+        printf("4.exit\n");
         printf("Enter your choice : ");
         scanf("%d",&ch);  
         int key;
         int result; 
         switch(ch)
         {
-            case 1: printf("Enter the to be inserted into the tree : ");
-                    // printf("%d\n",root->data);
+            case 1: printf("Enter the number to be inserted into the tree : ");
                     scanf("%d",&ele);
                     root=insert(ele,root);
                     break;
-            // case 2: root=delete(root);
-            //         break;
-            // case 3: printf("Enter the to be deleted into the tree : ");
-            //         scanf("%d %d",&ele,&pos)postorder;
-            //         root=del_spec(ele,pos,root);
-            //         break;
-            case 4: printf("Enter what order you want? \n");
+            case 2: printf("Enter what order you want? \n");
                     printf("1) inorder\n");
                     printf("2) preorder\n");
                     printf("3) postorder\n");
                     scanf("%d",&c);
                     display(c,root);
                     break;
-            case 5: printf("enter the key to be searched :");
+            case 3: printf("enter the key to be searched :");
                     scanf("%d",&key);
                     result=b_search_tree(key,root);
                     if(result==1)
@@ -60,6 +52,9 @@ int main()
                     else
                         printf("key not found\n");
                     break;
+            case 4:printf("Exiting code....");
+                   break;
+            default:printf("invlaid input\n");
         }
     }
 }
