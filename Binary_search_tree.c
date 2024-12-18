@@ -10,7 +10,6 @@ typedef struct BTREE
 bnode* insert(int,bnode*);
 bnode* getnode();
 bnode* delete(bnode*);
-bnode* del_spec(int,int,bnode*);
 int b_search_tree(int,bnode*);
 void display(int,bnode*);
 void postorder(bnode*);
@@ -73,7 +72,6 @@ bnode* insert(int ele,bnode* r)
     new->rlink=new->llink=NULL;
     if(r==NULL)
     {
-        // printf("%d\n");
         return new;
     }
     bnode* temp=r;
