@@ -77,6 +77,7 @@ poly* add_poly(poly*p1,poly*p2)
     while(temp1!=p1)
     {
         temp2=p2->link;
+        poly*prev2=p2;
         while(temp2!=p2)
         {
             if(temp1->x==temp2->x && temp1->y==temp2->y && temp1->z==temp2->z )
