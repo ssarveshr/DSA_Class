@@ -50,17 +50,12 @@ int main()
                     else
                         printf("key not found\n");
                     break;
-<<<<<<< HEAD
-            case 4: printf("Exiting code....");
-                    exit(0);
-                    break;
-=======
             case 4:printf("Exiting code....");
                    exit(0);
->>>>>>> bd6ec057fdcdcca187d442d378236a17dc1b568b
-            default:printf("invlaid input\n");
+            default:printf("invalid input\n");
         }
     }
+    return 0;
 }
 bnode *getnode()
 {
