@@ -8,6 +8,7 @@ WAP to implement DDL with following data feilds for the employee record
 */
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 typedef struct EMPLIST 
 {
     char SSN[10];
@@ -27,10 +28,10 @@ typedef struct EMPHEAD
 ehead *insert_front(ehead *);
 ehead *insert_rear(ehead *);
 ehead *delete_front(ehead *);
-// ehead *delete_rear(ehead *);
-// ehead *del_specific(ehead *);
+ehead *delete_rear(ehead *);
+ehead *del_specific(ehead *);
 enode *getnode();
-// void display(ehead *);
+void display(ehead *);
 int main()
 {
     ehead *head=(ehead*)malloc(sizeof(ehead));
@@ -59,13 +60,13 @@ int main()
                     break;
             case 3: head=delete_front(head);
                     break;
-            // case 4: head=delete_rear(head);
-            //         break;
-            // case 5: head=del_specific(head);
-            //         break;
-            // case 6: display(head);
-            //         break;
-            // case 7:exit(0);
+            case 4: head=delete_rear(head);
+                    break;
+            case 5: head=del_specific(head);
+                    break;
+            case 6: display(head);
+                    break;
+            case 7:exit(0);
         }
     }
 }
@@ -88,15 +89,19 @@ ehead* insert_front(ehead *head)
     if(head->rlink==NULL)
     {
         head->rlink=new;
-        new->llink=head;
+        new->llink=(enode*)head;
         head->data+=1;
+        if(head->data==1)
+            new->rlink=NULL;
         return head;
     }
     new->rlink=head->rlink;
     head->rlink=new;
-    new->llink=head;
+    new->llink=(enode*) head;
     new->rlink->llink=new;
     head->data+=1;
+    if(head->data==1)
+        new->rlink=NULL;
     return head;
 }
 ehead *insert_rear(ehead *head)
@@ -109,7 +114,7 @@ ehead *insert_rear(ehead *head)
     if(head->rlink==NULL)
     {
         head->rlink=new;
-        new->llink=head;
+        new->llink=(enode*)head;
         head->data+=1;
         return head;
     }
@@ -130,6 +135,92 @@ ehead *delete_front(ehead *head)
         printf("List empty");
         return head;
     }
+    enode* temp=head->rlink;
+    head->rlink=temp->rlink;
+    temp->rlink->llink=(enode*)head;
+    head->data-=1;
+    if(head->data==1)
+        head->rlink->rlink=NULL;
+    printf("\nFront node deleted\n");
+    return head;
 
+}
+ehead *delete_rear(ehead *head)
+{
+    enode*prev=NULL;
+    enode*present=head->rlink;
+    if(present==NULL)
+    {
+        printf("list empty\n");
+        return head;
+    }
+    while(present->rlink!=NULL)
+    {
+        prev=present;
+        present=present->rlink;
+    }
+    printf("\nRear node deleted\n");
+    prev->rlink=NULL;
+    head->data--;
+}
+ehead *del_specific(ehead *head)
+{
+    if(head->rlink==NULL)
+    {
+        printf("list empty cannot deleted\n");
+        return head;
+    }
+    char search_ssn[10];
+    printf("enter SSN to be deleted : ");
+    scanf("%s",search_ssn);
+    int flag=0;
+    enode*present=head->rlink;
+    enode*prev=NULL;
 
+    while(present!=NULL)
+    {
+        if(strcmp(search_ssn,present->SSN)==0)
+        {
+            printf("SSN found and deleted\n");
+            if(present->rlink==NULL)
+            {
+                if(prev==NULL)
+                    head->rlink=NULL;
+                else
+                    prev->rlink=NULL;
+            }
+            else
+            {
+                prev->rlink=present->rlink;
+                present->rlink->llink=prev;
+            }
+            flag=1;
+            break;
+        }
+        prev=present;
+        present=present->rlink;
+    }
+    if(flag==0)
+        printf("SSN not found in list\n");
+    return head;
+}
+void display(ehead *head)
+{
+    enode *temp=head->rlink;
+    int cnt=0;
+    if(temp==NULL)
+    {
+        printf("List empty\n");
+        return;
+    }
+    while(temp!=NULL)
+    {
+        printf("%d\n",cnt++);
+        printf("Social Security Number : %s\n",temp->SSN);
+        printf("Name : %s\n",temp->name);
+        printf("Department : %s\n",temp->dept);
+        printf("Designation : %s\n",temp->desig);
+        printf("Salary : %f\n\n",temp->sal);
+        temp=temp->rlink;
+    }
 }

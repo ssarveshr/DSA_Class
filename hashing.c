@@ -23,15 +23,19 @@ int main()
     int ch;
     while(1)
     {
-        printf("enter 1 for add record 2 for Display record 3 for exit\n");
+        printf("\n1.add record \n2.Display record \n3.exit\nChoose any one :");
         scanf("%d",&ch);
         flag=0;
         switch(ch)
         {
             case 1:
 
-            printf("enter enum ename salary: ");
-            scanf("%d %s %d",&e.eno,e.ename,&e.sal);
+            printf("enter employee number: ");
+            scanf("%d",&e.eno);
+            printf("enter employee name: ");
+            scanf("%s",e.ename);
+            printf("enter employee salary: ");
+            scanf("%d",&e.sal);
             index=indexcopy=(e.eno%n);
             fseek(fp,s*index,SEEK_SET);
             fread(&id,sizeof(int),1,fp);
@@ -66,11 +70,12 @@ int main()
                 fread(&e,sizeof(emp),1,fp);
                 if(e.eno!=-1)
                 {
-                    printf("%d %d %d\n",e.eno,e.ename,e.sal);
+                    printf("%d %s %d\n",e.eno,e.ename,e.sal);
                 }
             }
             break;
 
         }
     }
+    fclose(fp);
 }

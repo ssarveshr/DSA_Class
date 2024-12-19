@@ -50,9 +50,14 @@ int main()
                     else
                         printf("key not found\n");
                     break;
+<<<<<<< HEAD
             case 4: printf("Exiting code....");
                     exit(0);
                     break;
+=======
+            case 4:printf("Exiting code....");
+                   exit(0);
+>>>>>>> bd6ec057fdcdcca187d442d378236a17dc1b568b
             default:printf("invlaid input\n");
         }
     }
@@ -86,7 +91,7 @@ bnode* insert(int ele,bnode* r)
             }
             temp=temp->llink;
         }
-        else
+        else if(ele>temp->data)
         {
             if(temp->rlink==NULL)
             {
@@ -98,7 +103,7 @@ bnode* insert(int ele,bnode* r)
     }
     if(ele<temp->data)
         temp->llink=new;
-    else
+    else if(ele>temp->data)
         temp->rlink=new;
     return r;
 }
