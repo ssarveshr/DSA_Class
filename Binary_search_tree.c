@@ -85,7 +85,7 @@ bnode* insert(int ele,bnode* r)
             }
             temp=temp->llink;
         }
-        else
+        else if(ele>temp->data)
         {
             if(temp->rlink==NULL)
             {
@@ -97,7 +97,7 @@ bnode* insert(int ele,bnode* r)
     }
     if(ele<temp->data)
         temp->llink=new;
-    else
+    else if(ele>temp->data)
         temp->rlink=new;
     return r;
 }
