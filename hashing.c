@@ -1,5 +1,6 @@
 //Linear Probing with Division Hashing
 #include<stdio.h>
+#include<stdlib.h>
 typedef struct employee
 {
     int eno;
@@ -72,8 +73,10 @@ int main()
                 {
                     printf("%d %s %d\n",e.eno,e.ename,e.sal);
                 }
+
             }
             break;
+            case 3:exit(0);
 
         }
     }
