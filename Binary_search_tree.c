@@ -52,9 +52,10 @@ int main()
                     break;
             case 4:printf("Exiting code....");
                    exit(0);
-            default:printf("invlaid input\n");
+            default:printf("invalid input\n");
         }
     }
+    return 0;
 }
 bnode *getnode()
 {

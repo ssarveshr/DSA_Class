@@ -29,39 +29,37 @@ int main()
         flag=0;
         switch(ch)
         {
-            case 1:
-
-            printf("enter employee number: ");
-            scanf("%d",&e.eno);
-            printf("enter employee name: ");
-            scanf("%s",e.ename);
-            printf("enter employee salary: ");
-            scanf("%d",&e.sal);
-            index=indexcopy=(e.eno%n);
-            fseek(fp,s*index,SEEK_SET);
-            fread(&id,sizeof(int),1,fp);
-            while(id!=-1)//Linear Probing
-            {
-                index++;
-                flag=1;
-                if(index==n)
-                {
-                    index=0;
-                }
-                if(index==indexcopy)
-                {
-                    printf("File Full\n");
+            case 1: printf("enter employee number: ");
+                    scanf("%d",&e.eno);
+                    printf("enter employee name: ");
+                    scanf("%s",e.ename);
+                    printf("enter employee salary: ");
+                    scanf("%d",&e.sal);
+                    index=indexcopy=(e.eno%n);
+                    fseek(fp,s*index,SEEK_SET);
+                    fread(&id,sizeof(int),1,fp);
+                    while(id!=-1)//Linear Probing
+                    {
+                        index++;
+                        flag=1;
+                        if(index==n)
+                        {
+                            index=0;
+                        }
+                        if(index==indexcopy)
+                        {
+                            printf("File Full\n");
+                            break;
+                        }
+                        fseek(fp,s*index,SEEK_SET);
+                        fread(&id,sizeof(int),1,fp);
+                    }
+                    if(!((index==indexcopy)&&flag))
+                    {
+                        fseek(fp,s*index,SEEK_SET);
+                        fwrite(&e,sizeof(emp),1,fp);
+                    }
                     break;
-                }
-                fseek(fp,s*index,SEEK_SET);
-                fread(&id,sizeof(int),1,fp);
-            }
-            if(!((index==indexcopy)&&flag))
-            {
-                fseek(fp,s*index,SEEK_SET);
-                fwrite(&e,sizeof(emp),1,fp);
-            }
-            break;
 
             case 2:
             i=0;
@@ -73,10 +71,8 @@ int main()
                 {
                     printf("%d %s %d\n",e.eno,e.ename,e.sal);
                 }
-
             }
             break;
-            case 3:exit(0);
 
         }
     }

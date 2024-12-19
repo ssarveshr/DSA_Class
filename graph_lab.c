@@ -8,7 +8,7 @@ DFS/BFS method */
 #include<stdlib.h>
 #define SIZE 20
 void bfs(int n, int source, int amat[][SIZE], int visited[]);
-void main()
+int main()
 {
 	int n, amat[SIZE][SIZE], source, visited[SIZE], i, j;
 	printf("Enter number of vertices:\n");
