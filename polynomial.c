@@ -168,7 +168,7 @@ POLY *delete_node(POLY *head, POLY *temp)
     prev->link = pres->link;
     free(temp);
     return head;
-}
+} 
 
 void evaluate(POLY *head) 
 {

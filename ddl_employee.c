@@ -38,9 +38,9 @@ int main()
     head->data=0;
     head->llink=head->rlink=NULL;
     int ch;
-    enode *first;
-    char n[10],s[10],d[10],dg[10];
-    float sar;
+    // enode *first;
+    // char n[10],s[10],d[10],dg[10];
+    // float sar;
     while(1)
     {
         printf("1.insert front\n");
@@ -162,6 +162,7 @@ ehead *delete_rear(ehead *head)
     printf("\nRear node deleted\n");
     prev->rlink=NULL;
     head->data--;
+    return head;
 }
 ehead *del_specific(ehead *head)
 {
