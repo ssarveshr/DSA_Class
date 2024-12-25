@@ -1,6 +1,6 @@
 //Linear Probing with Division Hashing
 #include<stdio.h>
-#include <stdlib.h>
+#include<stdlib.h>
 typedef struct employee
 {
     int eno;
@@ -61,19 +61,18 @@ int main()
                     }
                     break;
 
-            case 2: i=0;
-                    for(;i<n;i++)
-                    {
-                        fseek(fp,s*i,SEEK_SET);
-                        fread(&e,sizeof(emp),1,fp);
-                        if(e.eno!=-1)
-                        {
-                            printf("%d %s %d\n",e.eno,e.ename,e.sal);
-                        }
-                    }
-                    break;
-            case 3: printf("Exiting code ... ");
-                    exit(0);
+            case 2:
+            i=0;
+            for(;i<n;i++)
+            {
+                fseek(fp,s*i,SEEK_SET);
+                fread(&e,sizeof(emp),1,fp);
+                if(e.eno!=-1)
+                {
+                    printf("%d %s %d\n",e.eno,e.ename,e.sal);
+                }
+            }
+            break;
 
         }
     }

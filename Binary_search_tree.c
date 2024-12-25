@@ -95,6 +95,8 @@ bnode* insert(int ele,bnode* r)
             }
             temp=temp->rlink;
         }
+        else
+            break;
     }
     if(ele<temp->data)
         temp->llink=new;
@@ -116,9 +118,9 @@ void preorder(bnode* r)
     if(r==NULL)
         return;
     printf("%d",r->data);
+    printf("\n");
     preorder(r->llink);
     preorder(r->rlink);
-    printf("\n");
 }
 void inorder(bnode* r)
 {
