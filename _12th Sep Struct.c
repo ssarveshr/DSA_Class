@@ -5,7 +5,7 @@ struct p_details
     int age;
     char name[10];
     float s_rate;
-} player[10];
+} player,player1,player2;
 int main()
 {
     printf("%d %s %.2f\n",player.age,player.name,player.s_rate);

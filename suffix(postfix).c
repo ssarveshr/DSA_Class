@@ -99,4 +99,5 @@ int compute(int o1, int o2, char s)
         case '%':return (o1%o2);
         default:printf("Invalid operator\n");
     }
+    return 0;
 }
