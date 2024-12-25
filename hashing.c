@@ -12,7 +12,7 @@ int main()
 {
     emp e;
     FILE *fp;
-    int n,i,s=(2*sizeof(int)+20),M_one=-1,choice,flag,index,indexcopy,id;
+    int n,i,s=(2*sizeof(int)+20),M_one=-1,flag,index,indexcopy,id;
     printf("enter the no of records : ");
     scanf("%d",&n);
     fp=fopen("abc.txt","w+");
@@ -61,18 +61,18 @@ int main()
                     }
                     break;
 
-            case 2:
-            i=0;
-            for(;i<n;i++)
-            {
-                fseek(fp,s*i,SEEK_SET);
-                fread(&e,sizeof(emp),1,fp);
-                if(e.eno!=-1)
-                {
-                    printf("%d %s %d\n",e.eno,e.ename,e.sal);
-                }
-            }
-            break;
+            case 2: i=0;
+                    for(;i<n;i++)
+                    {
+                        fseek(fp,s*i,SEEK_SET);
+                        fread(&e,sizeof(emp),1,fp);
+                        if(e.eno!=-1)
+                        {
+                            printf("%d %s %d\n",e.eno,e.ename,e.sal);
+                        }
+                    }
+                    break;
+            case 3: exit(0);
 
         }
     }
