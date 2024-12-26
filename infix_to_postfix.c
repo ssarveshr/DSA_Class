@@ -54,7 +54,7 @@ void infix_postfix(char infix[])
     stack[++top]='#';
     // top++;
     int j=0;
-    int i=0;
+    unsigned int i=0;
     for(;i<strlen(infix);i++)
     {
         symbol=infix[i];
